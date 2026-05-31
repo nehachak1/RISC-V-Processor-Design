@@ -1,4 +1,4 @@
-# VeriCore: A RISC-V Processor in Verilog
+# A RISC-V Processor in Verilog
 
 A custom RISC-V processor implemented in Verilog as part of the EPFL CS-200 Computer Systems course. The project includes instruction decoding, execution, scheduling, memory interactions, interrupt handling, and assembly-level program execution.
 
