@@ -1,0 +1,295 @@
+
+module tb_cpu ();
+    reg clk_i;
+    reg rst_ni;
+    reg [31:0] instruction_i;
+    wire [31:0] res_a;
+    wire [31:0] res_b;
+    wire res_c;
+    wire branch_op_o;
+    wire [31:0] imm_o;
+    wire ir_en_o;
+    wire pc_add_imm_o;
+    wire pc_en_o;
+    wire pc_sel_alu_o;
+    wire pc_sel_pc_base_o;
+    wire rf_we_o;
+    wire sel_addr_o;
+    wire sel_b_o;
+    wire sel_mem_o;
+    wire sel_pc_o;
+    wire sel_imm_o;
+    wire we_o;
+    wire [5:0] alu_op_o;
+
+    localparam FETCH1 = 4'b0000;
+    localparam FETCH2 = 4'b0001;
+    localparam DECODE = 4'b0010;
+    localparam U_TYPE = 4'b0011;
+    localparam R_TYPE = 4'b0100;
+    localparam S_TYPE = 4'b0101;
+    localparam I_TYPE = 4'b0110;
+    localparam BREAK  = 4'b0111;
+    localparam B_TYPE = 4'b1000;
+    localparam J_TYPE = 4'b1001;
+    localparam JALR   = 4'b1010;
+    localparam LOAD1  = 4'b1011;
+    localparam LOAD2  = 4'b1100;
+
+    cpu chip (
+        .clk_i(clk_i),
+        .rst_ni(rst_ni),
+        .rdata_i(instruction_i),
+        .addr_o(res_a),
+        .wdata_o(res_b),
+        .we_o(res_c)
+    );
+
+    reg [5:0] r0;
+
+    task display_total;
+        $display("Input values set : clk=%0b rst=%0b instr=%07b %05b %05b %03b %05b %07b", clk_i, rst_ni, instruction_i[31:25], instruction_i[24:20], instruction_i[19:15], instruction_i[14:12], instruction_i[11:7], instruction_i[6:0]);
+
+        // TODO please change how state is handled
+        case (chip.controller_inst.state_r)
+            FETCH1: $display("State = FETCH1");
+            FETCH2: $display("State = FETCH2");
+            DECODE: $display("State = DECODE");
+            R_TYPE: $display("State = R_TYPE");
+            I_TYPE: $display("State = I_TYPE");
+            U_TYPE: $display("State = U_TYPE");
+            LOAD1: $display("State = LOAD1");
+            LOAD2: $display("State = LOAD2");
+            S_TYPE: $display("State = S_TYPE");
+            BREAK: $display("State = BREAK");
+            B_TYPE: $display("State = B_TYPE");
+            JALR  : $display("State = JALR");
+            J_TYPE: $display("State = J_TYPE");
+        endcase
+
+        $display("BR OP %0b IR EN %0b", chip.branch_op_w, chip.ir_en_w);
+        $display("IMM %0h", chip.imm_w);
+        $display("PC ADD(%0b), EN(%0b), SEL ALU(%0b), SEL BASE (%0b)", chip.pc_add_imm_w, chip.pc_en_w, chip.pc_sel_alu_w, chip.pc_sel_pc_base_w);
+        $display("RF WE %0b WE %0b", chip.rf_we_w, chip.we_o);
+        $display("SEL ADDR(%0b), B(%0b), MEM(%0b), PC(%0b), IMM(%0b)", chip.sel_addr_w, chip.sel_b_w, chip.sel_mem_w, chip.sel_pc_w, chip.sel_imm_w);
+        $display("ALU OP(%0b)", chip.alu_op_w);
+        $display("PC ADDR(%0h) WDATA(%0h) WEN(%0h)", chip.next_pc_addr_w, res_b, res_c);
+        $display("IR Q (%0h)", chip.instruction_w);
+        $display("");
+        $display("REGISTER FILE");
+
+        for (r0 = 0; r0 < 32; r0 = r0 + 4) begin
+            $display("  (%0h) (%0h) (%0h) (%0h)", chip.rf_inst.reg_array_r[r0+0], chip.rf_inst.reg_array_r[r0+1], chip.rf_inst.reg_array_r[r0+2], chip.rf_inst.reg_array_r[r0+3]);
+        end
+        $display("");
+    endtask
+
+    reg [20:0] u;
+    reg [20:0] __state;
+    task get_state;
+        __state = chip.controller_inst.state_r;
+    endtask
+    task gen_instrutionc_rng;
+        u = ($urandom) % ('b011111);
+        $display("SELECT %d", u);
+
+        instruction_i = $urandom;
+        case (u)
+            // ITYPE
+            'b000000: begin // ADDI
+                instruction_i[6:0]   = 7'h13;
+                instruction_i[14:12] = 3'b000;
+            end
+            'b000001: begin // SLTI
+                instruction_i[6:0]   = 7'h13;
+                instruction_i[14:12] = 3'b010;
+            end
+            'b000010: begin // SLTIU
+                instruction_i[6:0]   = 7'h13;
+                instruction_i[14:12] = 3'b011;
+            end
+            'b000011: begin // XORI
+                instruction_i[6:0]   = 7'h13;
+                instruction_i[14:12] = 3'b100;
+            end
+            'b000100: begin // ORI
+                instruction_i[6:0]   = 7'h13;
+                instruction_i[14:12] = 3'b110;
+            end
+            'b000101: begin // ANDI
+                instruction_i[6:0]   = 7'h13;
+                instruction_i[14:12] = 3'b111;
+            end
+            'b000110: begin // SLLI
+                instruction_i[6:0]   = 7'h13;
+                instruction_i[14:12] = 3'b001;
+                instruction_i[31:25] = 7'b0000000;
+            end
+            'b000111: begin // SRLI
+                instruction_i[6:0]   = 7'h13;
+                instruction_i[14:12] = 3'b101;
+                instruction_i[31:25] = 7'b0000000;
+            end
+            'b001000: begin // SRAI
+                instruction_i[6:0]   = 7'h13;
+                instruction_i[14:12] = 3'b101;
+                instruction_i[31:25] = 7'b0100000;
+            end
+
+            // R TYPE
+            'b001001: begin // ADD
+                instruction_i[6:0]   = 7'h33;
+                instruction_i[14:12] = 3'b000;
+                instruction_i[31:25] = 7'b0000000;
+            end
+            'b001010: begin // SUB
+                instruction_i[6:0]   = 7'h33;
+                instruction_i[14:12] = 3'b000;
+                instruction_i[31:25] = 7'b0100000;
+            end
+            'b001011: begin // SLL
+                instruction_i[6:0]   = 7'h33;
+                instruction_i[14:12] = 3'b001;
+                instruction_i[31:25] = 7'b0000000;
+            end
+            'b001100: begin // SLT
+                instruction_i[6:0]   = 7'h33;
+                instruction_i[14:12] = 3'b010;
+                instruction_i[31:25] = 7'b0000000;
+            end
+            'b001101: begin // SLTU
+                instruction_i[6:0]   = 7'h33;
+                instruction_i[14:12] = 3'b011;
+                instruction_i[31:25] = 7'b0000000;
+            end
+            'b001110: begin // XOR
+                instruction_i[6:0]   = 7'h33;
+                instruction_i[14:12] = 3'b100;
+                instruction_i[31:25] = 7'b0000000;
+            end
+            'b001111: begin // SRL
+                instruction_i[6:0]   = 7'h33;
+                instruction_i[14:12] = 3'b101;
+                instruction_i[31:25] = 7'b0000000;
+            end
+            'b010000: begin // SRA
+                instruction_i[6:0]   = 7'h33;
+                instruction_i[14:12] = 3'b101;
+                instruction_i[31:25] = 7'b0100000;
+            end
+            'b010001: begin // OR
+                instruction_i[6:0]   = 7'h33;
+                instruction_i[14:12] = 3'b110;
+                instruction_i[31:25] = 7'b0000000;
+            end
+            'b010010: begin // SRA
+                instruction_i[6:0]   = 7'h33;
+                instruction_i[14:12] = 3'b111;
+                instruction_i[31:25] = 7'b0000000;
+            end
+
+            // U TYPE
+            'b010011: begin
+                instruction_i[6:0] = 7'b0110111;
+            end
+            // LOAD
+            'b010100: begin
+                instruction_i[6:0]   = 7'h03;
+                instruction_i[14:12] = 3'h2;
+            end
+            // STORE
+            'b010101: begin
+                instruction_i[6:0]   = 7'h23;
+                instruction_i[14:12] = 3'h2;
+            end
+            // EBREAK
+            'b010110: begin
+                instruction_i[6:0]   = 7'b1110011;
+            end
+
+            // Branch
+            'b010111: begin // BEQ
+                instruction_i[6:0]   = 7'h63;
+                instruction_i[14:12] = 3'h0;
+            end
+            'b011000: begin // BNE
+                instruction_i[6:0]   = 7'h63;
+                instruction_i[14:12] = 3'h1;
+            end
+            'b011001: begin // BLT
+                instruction_i[6:0]   = 7'h63;
+                instruction_i[14:12] = 3'h4;
+            end
+            'b011010: begin // BGE
+                instruction_i[6:0]   = 7'h63;
+                instruction_i[14:12] = 3'h5;
+            end
+            'b011011: begin // BLTU
+                instruction_i[6:0]   = 7'h63;
+                instruction_i[14:12] = 3'h6;
+            end
+            'b011100: begin // BGEU
+                instruction_i[6:0]   = 7'h63;
+                instruction_i[14:12] = 3'h7;
+            end
+
+            // J TYPE
+            'b011101: begin // JAL
+                instruction_i[6:0] = 7'h6F;
+            end
+            // JALR
+            'b011110: begin // JALR
+                instruction_i[6:0] = 7'h67;
+                instruction_i[14:12] = 3'h0;
+            end
+        endcase
+    endtask
+
+    reg [20:0] del = 0;
+
+    initial begin
+        localparam op___amount = 1024;
+        reg [20:0] u; 
+
+        display_total();
+        clk_i = 0;
+        rst_ni = 1;
+        #10;
+        display_total();
+        rst_ni = 0;
+        clk_i = 1;
+        #10;
+        display_total();
+        clk_i = 0;
+        rst_ni = 1;
+        #10;
+        display_total();
+        
+        for (u = 0; u < op___amount; u += 1) begin
+            clk_i = 0;
+            rst_ni = 1;
+
+            get_state();
+            if (__state == FETCH2) begin
+                gen_instrutionc_rng();
+            end
+            if (__state == BREAK) begin
+                del = del + 1;
+                if (del == 4) begin
+                    rst_ni = 0;
+                    del = 0;
+                end
+            end
+
+            #10;
+            $display("BEFORE");
+            display_total();
+            clk_i = 1;
+            #10;
+            $display("AFTER");
+            display_total();
+        end
+
+        $finish;
+    end
+endmodule

@@ -1,0 +1,228 @@
+
+->Content-Length:
+-> 
+->5
+->4
+->0
+->
+->
+
+
+->{"command":"initialize","arguments":{"clientID":"vscode","clientName":"Visual Studio Code","adapterID":"cs200","pathFormat":"path","linesStartAt1":true,"columnsStartAt1":true,"supportsVariableType":true,"supportsVariablePaging":true,"supportsRunInTerminalR
+->equest":true,"locale":"en","supportsProgressReporting":true,"supportsInvalidatedEvent":true,"supportsMemoryReferences":true,"supportsArgsCanBeInterpretedByShell":true,"supportsMemoryEvent":true,"supportsStartDebuggingRequest":true,"supportsANSIStyling":tru
+->e},"type":"request","seq":1}
+<-Content-Length: 224
+
+
+<-{"body":{"supportsConfigurationDoneRequest":true,"supportsReadMemoryRequest":true,"supportsSetVariable":true,"supportsWriteMemoryRequest":true},"command":"initialize","request_seq":1,"seq":1,"success":true,"type":"response"}
+<-Content-Length: 56
+
+
+<-{"body":{},"event":"initialized","seq":2,"type":"event"}
+->Content-Length:
+-> 
+->3
+->1
+->1
+->
+->
+
+
+->{"command":"launch","arguments":{"type":"cs200","name":"Debug File","request":"launch","program":"/home/gorgiev/Desktop/myfiles/BA3_CompArch/labC/Simple_Interrupt_Handler/template/assembly/program.s","stopOnEntry":true,"trace":true,"__sessionId":"91d69fb1-
+->8f26-412a-a49d-f35796e7092a"},"type":"request","seq":2}
+bin: /home/gorgiev/Desktop/myfiles/BA3_CompArch/labC/Simple_Interrupt_Handler/template/assembly/out/program.bin exe: /home/gorgiev/Desktop/myfiles/BA3_CompArch/labC/Simple_Interrupt_Handler/template/assembly/out/program
+
+->Content-Length:
+-> 
+->5
+->6
+->
+->
+
+
+->{"command":"configurationDone","type":"request","seq":3}
+<-Content-Length: 87
+
+
+<-{"body":{},"command":"launch","request_seq":2,"seq":3,"success":true,"type":"response"}
+<-Content-Length: 98
+
+
+<-{"body":{},"command":"configurationDone","request_seq":3,"seq":4,"success":true,"type":"response"}
+<-Content-Length: 84
+
+
+<-{"body":{"reason":"started","threadId":100},"event":"thread","seq":5,"type":"event"}
+<-Content-Length: 83
+
+
+<-{"body":{"reason":"pause","threadId":100},"event":"stopped","seq":6,"type":"event"}
+->Content-Length:
+-> 
+->4
+->6
+->
+->
+
+
+->{"command":"threads","type":"request","seq":4}
+<-Content-Length: 129
+
+
+<-{"body":{"threads":[{"id":100,"name":"TheThread"}]},"command":"threads","request_seq":4,"seq":7,"success":true,"type":"response"}
+->Content-Length:
+-> 
+->4
+->6
+->
+->
+
+
+->{"command":"threads","type":"request","seq":5}
+<-Content-Length: 129
+
+
+<-{"body":{"threads":[{"id":100,"name":"TheThread"}]},"command":"threads","request_seq":5,"seq":8,"success":true,"type":"response"}
+->Content-Length:
+-> 
+->1
+->0
+->5
+->
+->
+
+
+->{"command":"stackTrace","arguments":{"threadId":100,"startFrame":0,"levels":20},"type":"request","seq":6}
+<-Content-Length: 412
+
+
+<-{"body":{"stackFrames":[{"column":1,"id":200,"line":17,"name":"HelloDebugger","source":{"name":"/home/gorgiev/Desktop/myfiles/BA3_CompArch/labC/Simple_Interrupt_Handler/template/assembly/program.s","path":"/home/gorgiev/Desktop/myfiles/BA3_CompArch/labC/Simple_Interrupt_Handler/template/assembly/program.s","sourceReference":0}}]},"command":"stackTrace","request_seq":6,"seq":9,"success":true,"type":"response"}
+->Content-Length:
+-> 
+->4
+->6
+->
+->
+
+
+->{"command":"threads","type":"request","seq":7}
+<-Content-Length: 130
+
+
+<-{"body":{"threads":[{"id":100,"name":"TheThread"}]},"command":"threads","request_seq":7,"seq":10,"success":true,"type":"response"}
+->Content-Length:
+-> 
+->1
+->0
+->7
+->
+->
+
+
+->{"command":"updateInput","arguments":{"button":{},"joystick":{},"dip_switches":0},"type":"request","seq":8}
+<-Content-Length: 93
+
+
+<-{"body":{},"command":"updateInput","request_seq":8,"seq":11,"success":true,"type":"response"}
+->Content-Length:
+-> 
+->2
+->4
+->1
+->
+->
+
+
+->{"command":"updateInput","arguments":{"button":{"right":false,"center":false,"left":false,"bottom":false,"top":false},"joystick":{"down":false,"right":false,"pressed":false,"left":false,"up":false},"dip_switches":0},"type":"request","seq":9}
+<-Content-Length: 93
+
+
+<-{"body":{},"command":"updateInput","request_seq":9,"seq":12,"success":true,"type":"response"}
+->Content-Length:
+-> 
+->7
+->4
+->
+->
+
+
+->{"command":"scopes","arguments":{"frameId":200},"type":"request","seq":10}
+<-Content-Length: 277
+
+
+<-{"body":{"scopes":[{"expensive":false,"name":"Locals","presentationHint":"locals","variablesReference":300},{"expensive":false,"name":"System","presentationHint":"system","variablesReference":310}]},"command":"scopes","request_seq":10,"seq":13,"success":true,"type":"response"}
+->Content-Length:
+-> 
+->8
+->8
+->
+->
+
+
+->{"command":"variables","arguments":{"variablesReference":300},"type":"request","seq":11}
+<-Content-Length: 2228
+
+
+<-{"body":{"variables":[{"name":"PC","type":"int","value":"0x80000000","variablesReference":0},{"name":"zero","type":"int","value":"0x0","variablesReference":0},{"name":"ra","type":"int","value":"0x0","variablesReference":0},{"name":"sp","type":"int","value":"0x0","variablesReference":0},{"name":"gp","type":"int","value":"0x0","variablesReference":0},{"name":"tp","type":"int","value":"0x0","variablesReference":0},{"name":"t0","type":"int","value":"0x0","variablesReference":0},{"name":"t1","type":"int","value":"0x0","variablesReference":0},{"name":"t2","type":"int","value":"0x0","variablesReference":0},{"name":"s0","type":"int","value":"0x0","variablesReference":0},{"name":"s1","type":"int","value":"0x0","variablesReference":0},{"name":"a0","type":"int","value":"0x0","variablesReference":0},{"name":"a1","type":"int","value":"0x0","variablesReference":0},{"name":"a2","type":"int","value":"0x0","variablesReference":0},{"name":"a3","type":"int","value":"0x0","variablesReference":0},{"name":"a4","type":"int","value":"0x0","variablesReference":0},{"name":"a5","type":"int","value":"0x0","variablesReference":0},{"name":"a6","type":"int","value":"0x0","variablesReference":0},{"name":"a7","type":"int","value":"0x0","variablesReference":0},{"name":"s2","type":"int","value":"0x0","variablesReference":0},{"name":"s3","type":"int","value":"0x0","variablesReference":0},{"name":"s4","type":"int","value":"0x0","variablesReference":0},{"name":"s5","type":"int","value":"0x0","variablesReference":0},{"name":"s6","type":"int","value":"0x0","variablesReference":0},{"name":"s7","type":"int","value":"0x0","variablesReference":0},{"name":"s8","type":"int","value":"0x0","variablesReference":0},{"name":"s9","type":"int","value":"0x0","variablesReference":0},{"name":"s10","type":"int","value":"0x0","variablesReference":0},{"name":"s11","type":"int","value":"0x0","variablesReference":0},{"name":"t3","type":"int","value":"0x0","variablesReference":0},{"name":"t4","type":"int","value":"0x0","variablesReference":0},{"name":"t5","type":"int","value":"0x0","variablesReference":0},{"name":"t6","type":"int","value":"0x0","variablesReference":0}]},"command":"variables","request_seq":11,"seq":14,"success":true,"type":"response"}
+->Content-Length:
+-> 
+->7
+->7
+->
+->
+
+
+->{"command":"continue","arguments":{"threadId":100},"type":"request","seq":12}
+<-Content-Length: 91
+
+
+<-{"body":{},"command":"continue","request_seq":12,"seq":15,"success":true,"type":"response"}
+<-Content-Length: 165
+
+
+<-{"body":{"ledArray":{"b":[0,0,0,0,0,0,0,0,0,0],"g":[0,0,0,0,0,0,0,0,0,0],"r":[0,0,0,0,0,0,0,0,0,0]},"sevenSegment":{}},"event":"boardUpdate","seq":16,"type":"event"}
+->Content-Length:
+-> 
+->2
+->4
+->1
+->
+->
+
+
+->{"command":"updateInput","arguments":{"button":{"right":false,"center":true,"left":false,"bottom":false,"top":false},"joystick":{"down":false,"right":false,"pressed":false,"left":false,"up":false},"dip_switches":0},"type":"request","seq":13}
+<-Content-Length: 94
+
+
+<-{"body":{},"command":"updateInput","request_seq":13,"seq":17,"success":true,"type":"response"}
+->Content-Length:
+-> 
+->2
+->4
+->2
+->
+->
+
+
+->{"command":"updateInput","arguments":{"button":{"right":false,"center":false,"left":false,"bottom":false,"top":false},"joystick":{"down":false,"right":false,"pressed":false,"left":false,"up":false},"dip_switches":0},"type":"request","seq":14}
+<-Content-Length: 94
+
+
+<-{"body":{},"command":"updateInput","request_seq":14,"seq":18,"success":true,"type":"response"}
+<-Content-Length: 195
+
+
+<-{"body":{"ledArray":{"b":[0,0,0,0,0,0,0,0,0,0],"g":[4095,4095,4095,4095,4095,4095,4095,4095,4095,4095],"r":[0,0,0,0,0,0,0,0,0,0]},"sevenSegment":{}},"event":"boardUpdate","seq":19,"type":"event"}
+->Content-Length:
+-> 
+->8
+->0
+->
+->
+
+
+->{"command":"disconnect","arguments":{"restart":false},"type":"request","seq":15}
+<-Content-Length: 93
+
+
+<-{"body":{},"command":"disconnect","request_seq":15,"seq":20,"success":true,"type":"response"}

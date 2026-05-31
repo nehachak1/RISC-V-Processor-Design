@@ -1,0 +1,321 @@
+###############################################################################
+# RISC-V Verilog + Assembly project .gitignore
+# Covers: Verilator, Icarus, Questa/ModelSim, VCS, Xcelium, Vivado, Quartus,
+#         GTKWAVE, common Make/CMake builds, VS Code, Linux/macOS/Windows.
+###############################################################################
+
+# ---------------------------------------------------------------------------
+# OS / Editor / Misc
+# ---------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+*~
+*.swp
+*.swo
+*.tmp
+*.bak
+*.old
+*.orig
+*.rej
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+.idea/
+*.iml
+
+# ---------------------------------------------------------------------------
+# Archives / outputs
+# ---------------------------------------------------------------------------
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+*.gz
+*.bz2
+
+# ---------------------------------------------------------------------------
+# General build directories
+# ---------------------------------------------------------------------------
+build/
+Build/
+out/
+dist/
+target/
+bin/
+obj/
+objs/
+.tmp/
+.cache/
+CMakeFiles/
+cmake-build-*/
+CMakeCache.txt
+Makefile
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.elf
+*.map
+*.d
+*.dep
+*.log
+
+# at build-time:
+compile_commands.json
+
+# ---------------------------------------------------------------------------
+# Assembly / toolchain artifacts (RISC-V)
+# ---------------------------------------------------------------------------
+*.i
+*.srec
+*.hex
+*.bin
+*.lst
+*.dis
+*.dump
+*.sym
+*.aasm
+*.link
+*.ld.gen
+*.dts
+*.dtb
+
+# objdump/objcopy outputs
+*.asm
+*.objdump
+*.readelf
+
+# ---------------------------------------------------------------------------
+# Simulation artifacts
+# ---------------------------------------------------------------------------
+# Waveforms
+*.vcd
+*.vpd
+*.fst
+*.wlf
+*.lxt
+*.lxt2
+*.lxt3
+*.lxt4
+*.ghw
+*.fsdb
+*.trn
+*.trc
+*.evcd
+
+# Test output dumps
+*.mem
+*.ram
+*.rom
+*.img
+
+# Logs & transcripts
+transcript
+vsim.wlf
+*.jou
+*.str
+*.rpt
+*.rdb
+*.vstf
+
+# ---------------------------------------------------------------------------
+# Verilator
+# ---------------------------------------------------------------------------
+obj_dir/
+verilator/
+*.vlt
+*.verilator
+verilator.log
+verilator_warn*.log
+
+# C++ harnesses:
+*.dSYM/
+*.gcda
+*.gcno
+*.gcov
+coverage/
+lcov.info
+
+# ---------------------------------------------------------------------------
+# Icarus Verilog
+# ---------------------------------------------------------------------------
+*.vvp
+a.out
+ivl_vhdl_work/
+ivlpp/
+iverilog.out
+
+# ---------------------------------------------------------------------------
+# Questa / ModelSim
+# ---------------------------------------------------------------------------
+work/
+worklib/
+questa/
+modelsim.ini
+*.mpf
+*.wlf
+*.sav
+qwave.db
+*_lib.qdb
+*_lib.qpg
+*_lib.qtl
+*_lib.qtx
+*_lib.qwd
+*_lib.qwf
+
+# ---------------------------------------------------------------------------
+# Synopsys VCS / DVE
+# ---------------------------------------------------------------------------
+simv
+simv.daidir/
+csrc/
+ucli.key
+DVEfiles/
+dve*.log
+vcs*.log
+*.vdb
+*.daidir
+
+# ---------------------------------------------------------------------------
+# Cadence Xcelium / Incisive
+# ---------------------------------------------------------------------------
+INCA_libs/
+xcelium.d/
+xrun.history
+xrun.log
+xrun.key
+irun.history
+irun.log
+waves.shm/
+*.shm
+*.dsn
+*.trn
+*.xtf
+
+# ---------------------------------------------------------------------------
+# Synopsys Verdi / FSDB
+# ---------------------------------------------------------------------------
+novas.conf
+novas.rc
+nWaveLog/
+verdiLog/
+*.fsdb
+*.sdf.X
+
+# ---------------------------------------------------------------------------
+# GTKWave / viewers
+# ---------------------------------------------------------------------------
+*.gtkw
+*.sav
+
+# ---------------------------------------------------------------------------
+# FPGA / Synthesis tools
+# ---------------------------------------------------------------------------
+
+## Xilinx Vivado
+.vivado/
+Xil/
+*.runs/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+*.srcs/
+*.gen/
+*.xpr
+*.xpr.user
+*.jou
+*.log
+*.str
+*.wdb
+*.pb
+*.dcp
+*.ltx
+
+## Intel Quartus
+db/
+incremental_db/
+output_files/
+qdb/
+*.qpf
+*.qsf.user
+*.qws
+*.sof
+*.pof
+*.jic
+*.rbf
+*.rpt
+*.smsg
+*.qdf
+*.pin
+*.summary
+
+## Lattice / Gowin / others 
+*.svf
+*.bit
+*.jed
+*.xcf
+*.ucf
+*.xdc
+*.sdc
+
+# ---------------------------------------------------------------------------
+# Documentation build / LaTeX (if you write reports)
+# ---------------------------------------------------------------------------
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# ---------------------------------------------------------------------------
+# Python 
+# ---------------------------------------------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# ---------------------------------------------------------------------------
+# Node
+# ---------------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+
+###############################################################################
+# Keep list: add exceptions below if you need to track specific generated files
+###############################################################################
