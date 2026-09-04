@@ -1,6 +1,6 @@
 # A RISC-V Processor in Verilog
 
-A custom RISC-V processor implemented in Verilog as part of the EPFL CS-200 Computer Systems course. The project includes instruction decoding, execution, scheduling, memory interactions, interrupt handling, and assembly-level program execution.
+A custom RISC-V processor implemented in Verilog as part of the EPFL CS-200 Computer Architecture course. The project includes instruction decoding, execution, scheduling, memory interactions, interrupt handling, and assembly-level program execution.
 
 ## Overview
 
@@ -170,11 +170,3 @@ This project provided hands-on experience with:
 - Control unit design
 - Low-level system programming
 - Hardware verification and debugging
-
----
-
-## Academic Context
-
-Developed as part of the **CS-200 Computer Systems** course at EPFL.
-
-The project focuses on implementing a functioning RISC-V processor from the instruction set level down to hardware execution using Verilog and assembly.
